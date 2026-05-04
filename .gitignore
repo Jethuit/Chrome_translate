@@ -1,0 +1,11 @@
+.claude/
+备份/
+
+*.zip
+*.crx
+*.pem
+*.key
+*.log
+
+.DS_Store
+Thumbs.db
