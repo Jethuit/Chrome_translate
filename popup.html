@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Web Translator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>LLM Web Translator</h1>
+
+    <div class="section">
+      <h2>⚙️ LLM 配置</h2>
+      <div class="field profile-row">
+        <select id="profileSelect"></select>
+        <button id="addProfile" class="icon-btn" title="保存为新配置">+</button>
+        <button id="deleteProfile" class="icon-btn icon-btn-danger" title="删除当前配置">−</button>
+      </div>
+      <div id="profileToast" class="profile-toast"></div>
+      <div class="field">
+        <label for="profileName">配置名称</label>
+        <input type="text" id="profileName" placeholder="例如：OpenAI GPT-4o">
+      </div>
+      <div class="field">
+        <label for="baseUrl">Base URL</label>
+        <input type="text" id="baseUrl" placeholder="https://api.openai.com/v1">
+        <p class="hint">例如：https://api.openai.com/v1 或自定义服务器地址</p>
+      </div>
+      <div class="field">
+        <label for="apiKey">API Key（可选）</label>
+        <input type="password" id="apiKey" placeholder="sk-...">
+      </div>
+      <div class="field">
+        <label for="modelId">Model ID</label>
+        <input type="text" id="modelId" placeholder="gpt-4o">
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🔧 翻译设置</h2>
+      <div class="field checkbox-field">
+        <label>
+          <input type="checkbox" id="autoJapanese" checked>
+          自动翻译日文
+        </label>
+      </div>
+      <div class="field checkbox-field">
+        <label>
+          <input type="checkbox" id="autoEnglish">
+          自动翻译英文
+        </label>
+      </div>
+      <div class="field checkbox-field">
+        <label>
+          <input type="checkbox" id="autoAll">
+          自动翻译所有非目标语言
+        </label>
+      </div>
+      <div class="field">
+        <label for="hotkey">👆 悬停翻译快捷键</label>
+        <select id="hotkey">
+          <option value="Alt">Alt</option>
+          <option value="Control">Ctrl</option>
+          <option value="Shift">Shift</option>
+          <option value="Meta">Meta (Win/Cmd)</option>
+        </select>
+        <p class="hint">按住此键 + 鼠标悬停内容 1 秒即可翻译</p>
+      </div>
+      <div class="field">
+        <label for="targetLang">目标语言</label>
+        <select id="targetLang">
+          <option value="中文">中文</option>
+          <option value="English">English</option>
+          <option value="日本語">日本語</option>
+          <option value="한국어">한국어</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="autoTranslateLimit">单段落重试上限</label>
+        <input type="number" id="autoTranslateLimit" min="0" max="99" value="3">
+        <p class="hint">单个段落翻译失败后最多重试几次，0 = 不限制。连续 3 次错误自动暂停</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>当前页面</h2>
+      <div class="field checkbox-field">
+        <label>
+          <input type="checkbox" id="enabled" checked>
+          启用翻译
+        </label>
+      </div>
+      <button id="translatePage">📝 翻译当前可见内容</button>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
